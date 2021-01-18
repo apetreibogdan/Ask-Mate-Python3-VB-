@@ -10,10 +10,11 @@
         <img src="/static/image/question/{{question_story.image}}" width="385">
     <br> <br><br> <br>
         <h1> <span style="font-size: 50px;">Q:</span> {{question_story.title}}</h1>
+        <h1> by {{question_story.email}}</h1>
 
         <div>
             <h3 class="qhead"> &nbsp;&nbsp;Message: {{question_story.message}} </h3>
-            ( question_id: {{ question_story.id }} )&nbsp;&nbsp;&nbsp;
+<!--            ( question_id: {{ question_story.id }} )&nbsp;&nbsp;&nbsp;-->
             <a href="{{ url_for('vote_question_up',question_id=question_story.id ) }}">vote UP</a>
                             {{ question_story.vote_number }}&nbsp;&nbsp;&nbsp;
             <a  href="{{ url_for('vote_question_down',question_id=question_story.id ) }}">vote DOWN</a>&nbsp;&nbsp;&nbsp;

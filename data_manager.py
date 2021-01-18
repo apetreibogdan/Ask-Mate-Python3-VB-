@@ -57,12 +57,15 @@ def get_all_answers_stories(cursor: RealDictCursor) -> list:
     return cursor.fetchall()
 
 
+
+
 @database_common.connection_handler
 def get_questions_story(cursor: RealDictCursor, question_id) -> list:
     query = f"""
-        SELECT *
-        FROM question
-        WHERE id = {question_id}
+        SELECT * , u.email
+        FROM question q
+LEFT JOIN users u ON q.user_id = u.id
+WHERE q.id = {question_id}
        """
     cursor.execute(query)
     return cursor.fetchone()
@@ -103,20 +106,22 @@ def get_answer_story_by_answer_id(cursor: RealDictCursor, answer_id) -> list:
 
 
 @database_common.connection_handler
-def write_question_story(cursor: RealDictCursor, question_story) -> list:
+def write_question_story(cursor: RealDictCursor, question_story,userid) -> list:
     query = f"""
                 INSERT INTO question ( submission_time,
                                         view_number,
                                         vote_number,
                                         title,
                                         message,
-                                        image)
+                                        image,
+                                        user_id)
                 VALUES ('{question_story['submission_time']}',
                         '{question_story['view_number']}',
                         '{question_story['vote_number']}',
                         '{question_story['title']}',
                         '{question_story['message']}',
-                        '{question_story['image']}')
+                        '{question_story['image']}',
+                        '{userid}')
                 """
     cursor.execute(query)
 
@@ -385,17 +390,29 @@ def get_bigest_id(cursor: RealDictCursor, table) -> list:
 
 
 @database_common.connection_handler
-def write_user_story(cursor: RealDictCursor, user_story) -> list:
+def list_users(cursor: RealDictCursor) -> list:
     query = """
-               INSERT INTO users (  reputation,
-                                    registration_date,
-                                    email,
-                                    password )
-               VALUES ( %s, %s, %s, %s)
-                   """
-    cursor.execute(query, (0,
-                           utility.get_current_datetime(),
-                           user_story['email'],
-                           user_story['password']))
+        SELECT email
+        FROM users
+       """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def user_password(cursor: RealDictCursor, user: str) -> list:
+    query = """
+        SELECT password
+        FROM users
+        WHERE email = '%s' """
+    cursor.execute(query%(user))
+    return cursor.fetchall()
 
 
+@database_common.connection_handler
+def select_userid(cursor: RealDictCursor, user) -> list:
+    query = """
+        SELECT id
+        FROM users
+        WHERE email = '%s' """
+    cursor.execute(query%(user))
+    return cursor.fetchall()

@@ -1,14 +1,52 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask,redirect,render_template,request,url_for,session,Response,make_response
 import data_manager, utility
 import os
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-
-@app.route("/")
 def list_first_5_questions():
     all_questions_stories = data_manager.get_first_5_questions_stories()
     return render_template("list.html", all_questions_stories=all_questions_stories)
+
+@app.route("/")
+def index():
+    if session.get('username') :
+        variabila1 = session['username']
+        return list_first_5_questions()
+    else:
+        return redirect('/login')
+
+@app.route("/login",methods=["POST","GET"])
+def login():
+    if request.method == "POST":
+        password = request.form.get('password')
+        user = request.form.get('user')
+        users = data_manager.list_users()
+        list_users = []
+        for things in users:
+            list_users.append(things['email'])
+
+        if user in list_users:
+            hash_pass = data_manager.user_password(user)
+            if utility.verify_password(password,hash_pass[0]['password']):
+                session['username']= user
+                return list_first_5_questions()
+
+            else:
+                return render_template("login.html",error = "incorrect password")
+        else:
+            return render_template("login.html", error="incorrect user")
+
+    return render_template('login.html')
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect('/login')
+
+
 
 
 @app.route("/list")
@@ -40,6 +78,7 @@ def list_search_result():
 def list_question(question_id):
     if request.method == "GET":
         question_story = data_manager.get_questions_story(question_id)
+        print(question_story)
         answer_story = data_manager.get_answer_story(question_id)
         question_comment_stories = data_manager.get_question_comments_stories(question_id)
         all_answers_comments_stories = data_manager.get_all_comment_stories()
@@ -65,7 +104,8 @@ def add_question():
             partial_question_story.update({'image': ''})
 
         question_story = utility.question_story_constructor(partial_question_story)
-        data_manager.write_question_story(question_story)
+        userid = data_manager.select_userid(session['username'])
+        data_manager.write_question_story(question_story,userid[0]['id'])
         question_id = data_manager.get_bigest_id('question')
         return redirect(url_for('list_question', question_id=question_id['max']))
 
@@ -234,26 +274,6 @@ def add_question_tag(question_id):
         return redirect(url_for('list_question', question_id=question_id))
     if request.method == "GET":
         return render_template("add-question-tag.html", question_id=question_id)
-
-
-@app.route('/registration', methods=['POST', 'GET'])
-def register_user():
-    if request.method == "GET":
-        return render_template("registration.html")
-    if request.method == "POST":
-        user_story = request.form.to_dict()
-        user_story['password'] = utility.hash_password(user_story['password'])
-        data_manager.write_user_story(user_story)
-        return redirect('/')
-
-
-@app.route('/users')
-def list_all_users():
-    data_manager.get_all_users_stories();
-
-
-    return render_template("users_details.html")
-
 
 
 if __name__ == "__main__":

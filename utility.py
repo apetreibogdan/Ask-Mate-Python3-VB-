@@ -3,8 +3,8 @@ import datetime
 import os
 import bcrypt
 
-QUESTION_IMG_PATH = "/home/bobo/PycharmProjects/ask-mate-2-python-apetreibogdan/static/image/question"
-ANSWER_IMG_PATH = "/home/bobo/PycharmProjects/ask-mate-2-python-apetreibogdan/static/image/answer"
+QUESTION_IMG_PATH = "/home/victor/PycharmProjects/ask mate 2 bogdan/ask-mate-2-python-apetreibogdan/static/image/question"
+ANSWER_IMG_PATH = "/home/victor/PycharmProjects/ask mate 2 bogdan/ask-mate-2-python-apetreibogdan/static/image/answer"
 
 
 def question_story_constructor(partial_question_story):
@@ -26,6 +26,8 @@ def answer_story_constructor(question_id, partial_answer_story):
 def get_current_datetime():
     current_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     return current_datetime
+
+
 
 
 def remuve_question_image(file_name):
@@ -81,7 +83,6 @@ def get_list_with_all_answers_ids_of_a_question(question_id):
             list_of_ids.append (answer_story['id'])
     return (list_of_ids)
 
-
 def hash_password(plain_text_password):
     # By using bcrypt, the salt is saved into the hash itself
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
@@ -91,4 +92,3 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
-
