@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_title %} Main page {% endblock %}
+
+
+{% block content %}
+    <div class="form">
+        <form  action="/registration" method="POST">
+            <label>Email</label><br>
+            <input  type="text" name="email"> <br><br><br>
+
+            <label>Password</label><br>
+            <input  type="password" name="password"> <br><br><br>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+{% endblock %}
