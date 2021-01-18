@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block page_title %} Main page {% endblock %}
+
+
+{% block content %}
+
+
+{% for question_story in all_questions_stories %}
+    <h1><a href="{{ url_for('list_question', question_id=question_story.id) }}">{{question_story.title}}</a><br>
+        <img src="/static/image/question/{{question_story.image}}" width="200">
+    </h1>
+    <h2>{{ question_story.message}}</h2>
+    question id: {{ question_story.id}}<br>
+    Submision time: {{ question_story.submission_time}}<br>
+    votes : {{ question_story.vote_number}}
+    views: {{ question_story.view_number}}
+    <hr/>
+{% endfor %}
+
+
+{% endblock %}

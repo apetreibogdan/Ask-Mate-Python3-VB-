@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %} Main page {% endblock %}
+
+
+{% block content %}
+
+    <div class="form">
+        <form  method="POST" enctype="multipart/form-data">
+            {% for line in answer_comment_story %}
+                <label>Message</label><br>
+                <input type="text" value="{{ line.message }}" name="message"><br><br>
+                <button type="submit">Save</button>
+            {% endfor %}
+        </form>
+    </div>
+
+{% endblock %}
