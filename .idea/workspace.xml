@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5618da48-6b40-4be0-aa15-cf740a22ddd0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database_common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample_data/askmatepart2-sample-data.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/image/question/Screenshot from 2021-01-08 07-35-32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/image/question/Screenshot from 2021-01-08 07-35-36.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/layout.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add-answer-comment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add-answer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add-question-comment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add-question-tag.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add-question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/display-question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/display-search-results.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit-answer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit-comment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit-question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/users.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-    </list>
+    <list default="true" id="5618da48-6b40-4be0-aa15-cf740a22ddd0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,6 +90,7 @@
       <workItem from="1610963906727" duration="927000" />
       <workItem from="1610964897635" duration="8000" />
       <workItem from="1610964938778" duration="347000" />
+      <workItem from="1610973860415" duration="121000" />
     </task>
     <servers />
   </component>
