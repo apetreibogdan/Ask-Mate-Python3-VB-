@@ -416,3 +416,19 @@ def select_userid(cursor: RealDictCursor, user) -> list:
         WHERE email = '%s' """
     cursor.execute(query%(user))
     return cursor.fetchall()
+
+@database_common.connection_handler
+def write_user_story(cursor: RealDictCursor, user_story) -> list:
+    query = """
+               INSERT INTO users (  reputation,
+                                    username,
+                                    registration_date,
+                                    email,
+                                    password )
+               VALUES ( %s, %s, %s, %s, %s)
+                   """
+    cursor.execute(query, (0,
+                           user_story['username'],
+                           utility.get_current_datetime(),
+                           user_story['email'],
+                           user_story['password']))

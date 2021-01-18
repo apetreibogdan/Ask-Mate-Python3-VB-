@@ -275,6 +275,15 @@ def add_question_tag(question_id):
     if request.method == "GET":
         return render_template("add-question-tag.html", question_id=question_id)
 
+@app.route('/registration', methods=['POST', 'GET'])
+def register_user():
+    if request.method == "GET":
+        return render_template("registration.html")
+    if request.method == "POST":
+        user_story = request.form.to_dict()
+        user_story['password'] = utility.hash_password(user_story['password'])
+        data_manager.write_user_story(user_story)
+        return redirect('/')
 
 if __name__ == "__main__":
     app.run(
