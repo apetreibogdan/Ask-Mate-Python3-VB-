@@ -1644,16 +1644,19 @@ UC/10
     </table>
     <table id="39" parent="20" name="comment">
       <ObjectId>49767</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>5833</StateNumber>
     </table>
     <table id="40" parent="20" name="question">
       <ObjectId>49735</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>5829</StateNumber>
     </table>
     <table id="41" parent="20" name="question_tag">
       <ObjectId>49786</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>5836</StateNumber>
     </table>
@@ -1664,6 +1667,7 @@ UC/10
     </table>
     <table id="43" parent="20" name="users">
       <ObjectId>49724</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>5828</StateNumber>
     </table>

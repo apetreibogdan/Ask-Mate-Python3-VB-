@@ -62,11 +62,11 @@ def get_all_answers_stories(cursor: RealDictCursor) -> list:
 @database_common.connection_handler
 def get_questions_story(cursor: RealDictCursor, question_id) -> list:
     query = f"""
-        SELECT * , u.email
+        SELECT q.* , u.email
         FROM question q
-LEFT JOIN users u ON q.user_id = u.id
-WHERE q.id = {question_id}
-       """
+        LEFT JOIN users u ON q.user_id = u.id
+        WHERE q.id = {question_id}
+        """
     cursor.execute(query)
     return cursor.fetchone()
 
@@ -106,7 +106,7 @@ def get_answer_story_by_answer_id(cursor: RealDictCursor, answer_id) -> list:
 
 
 @database_common.connection_handler
-def write_question_story(cursor: RealDictCursor, question_story,userid) -> list:
+def write_question_story(cursor: RealDictCursor, question_story, userid) -> list:
     query = f"""
                 INSERT INTO question ( submission_time,
                                         view_number,

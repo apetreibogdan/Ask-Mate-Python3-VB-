@@ -78,7 +78,6 @@ def list_search_result():
 def list_question(question_id):
     if request.method == "GET":
         question_story = data_manager.get_questions_story(question_id)
-        print(question_story)
         answer_story = data_manager.get_answer_story(question_id)
         question_comment_stories = data_manager.get_question_comments_stories(question_id)
         all_answers_comments_stories = data_manager.get_all_comment_stories()
@@ -102,7 +101,6 @@ def add_question():
             partial_question_story.update({'image': image.filename})
         else:
             partial_question_story.update({'image': ''})
-
         question_story = utility.question_story_constructor(partial_question_story)
         userid = data_manager.select_userid(session['username'])
         data_manager.write_question_story(question_story,userid[0]['id'])
@@ -144,12 +142,13 @@ def delete_question(question_id):
     except:
         print('nu sunt imagini ')
     data_manager.delete_answer_story(question_id)
-
     try:
         utility.remuve_all_answers_images_of_a_question(question_id)
     except:
-        print('nu sunt imagini ')
+        print('nu sunt imagini cccc')
+
     data_manager.delete_question_story(question_id)
+
     return redirect(url_for('list_all_questions'))
 
 
