@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/home/victor/PycharmProjects/askmate33/ask-mate-3-python-Kinkey232/venv'
+VIRTUAL_ENV='/home/victor/PycharmProjects/ask-mate-3-python-Kinkey232/venv'
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
