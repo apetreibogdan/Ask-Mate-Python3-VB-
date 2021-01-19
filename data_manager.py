@@ -62,7 +62,7 @@ def get_all_answers_stories(cursor: RealDictCursor) -> list:
 @database_common.connection_handler
 def get_questions_story(cursor: RealDictCursor, question_id) -> list:
     query = f"""
-        SELECT q.* , u.email
+        SELECT q.* , u.username
         FROM question q
         LEFT JOIN users u ON q.user_id = u.id
         WHERE q.id = {question_id}
