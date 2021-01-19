@@ -78,6 +78,7 @@ def list_search_result():
 def list_question(question_id):
     if request.method == "GET":
         question_story = data_manager.get_questions_story(question_id)
+        print(question_story)
         answer_story = data_manager.get_answer_story(question_id)
         question_comment_stories = data_manager.get_question_comments_stories(question_id)
         all_answers_comments_stories = data_manager.get_all_comment_stories()
@@ -290,7 +291,9 @@ def register_user():
 def list_all_users():
     users_stories = data_manager.get_all_users_stories()
     return render_template("users.html", users_stories=users_stories)
-
+@app.route('/user')
+def profile():
+    return render_template('user.html')
 
 if __name__ == "__main__":
     app.run(
