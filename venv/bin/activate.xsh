@@ -28,7 +28,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"/home/victor/PycharmProjects/askmate33/ask-mate-3-python-Kinkey232/venv"
+$VIRTUAL_ENV = r"/home/victor/PycharmProjects/ask-mate-3-python-Kinkey232/venv"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]

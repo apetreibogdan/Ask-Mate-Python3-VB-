@@ -5,10 +5,10 @@ import os
 import psycopg2
 import psycopg2.extras
 
-os.environ['PSQL_USER_NAME'] = 'bobo'
-os.environ['PSQL_PASSWORD'] = 'bobo123'
+os.environ['PSQL_USER_NAME'] = 'postgres'
+os.environ['PSQL_PASSWORD'] = 'teiubesc11'
 os.environ['PSQL_HOST'] = 'localhost'
-os.environ['PSQL_DB_NAME'] = 'askmate3'
+os.environ['PSQL_DB_NAME'] = 'test_db'
 
 
 def get_connection_string():
