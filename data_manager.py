@@ -434,9 +434,9 @@ def write_user_story(cursor: RealDictCursor, user_story) -> list:
                            user_story['password']))
 
 @database_common.connection_handler
-def get_all_users_stories(cursor: RealDictCursor, ) -> list:
+def get_all_users_stories(cursor: RealDictCursor ) -> list:
     query = """
-        SELECT * 
+        SELECT *
         FROM users
         """
     cursor.execute(query)
