@@ -432,3 +432,12 @@ def write_user_story(cursor: RealDictCursor, user_story) -> list:
                            utility.get_current_datetime(),
                            user_story['email'],
                            user_story['password']))
+
+@database_common.connection_handler
+def get_all_users_stories(cursor: RealDictCursor, ) -> list:
+    query = """
+        SELECT * 
+        FROM users
+        """
+    cursor.execute(query)
+    return cursor.fetchall()

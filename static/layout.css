@@ -84,3 +84,10 @@ body {
 }
 
 
+
+.users_tabel{
+  width: 100%;
+  border-collapse: collapse;
+    border: 3px solid black;
+
+}

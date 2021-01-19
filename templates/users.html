@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page_title %} Users {% endblock %}
+
+
+{% block content %}
+
+
+
+
+
+    {{ users_stories }}
+
+    <table class="users_tabel">
+    <tr class="users_tabel">
+            <td> id </td>
+            <td> User Name  </td>
+            <td> Registration Date  </td>
+            <td> Count of asked Questions  </td>
+            <td> Count of Answers  </td>
+            <td> Count of comments </td>
+            <td> Reputation   </td>
+    </tr>
+    {% for user in users_stories %}
+        <tr>
+            <td> {{ user.id }} </td>
+            <td> {{ user.username}} </td>
+            <td> {{ user.registration_date }} </td>
+            <td> count questions </td>t
+            <td> count answers </td>t
+            <td> count comment</td>
+            <td> {{ user.reputation }}</td>
+        </tr>
+    {% endfor %}
+
+
+    </table>
+
+
+
+{% endblock %}

@@ -284,6 +284,14 @@ def register_user():
         data_manager.write_user_story(user_story)
         return redirect('/')
 
+
+
+@app.route('/users')
+def list_all_users():
+    users_stories = data_manager.get_all_users_stories()
+    return render_template("users.html", users_stories=users_stories)
+
+
 if __name__ == "__main__":
     app.run(
         debug=True
