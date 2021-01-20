@@ -441,3 +441,18 @@ def get_all_users_stories(cursor: RealDictCursor ) -> list:
         """
     cursor.execute(query)
     return cursor.fetchall()
+
+
+@database_common.connection_handler
+def list_user_profile(cursor: RealDictCursor ,userid) -> list:
+    query = """
+        select  u.id, u.username, u.registration_date, u.reputation, count (distinct q.id) as count_questions, count (distinct a.id) as count_answers, count (distinct c.id) as count_comments
+from users u
+left join question q on u.id = q.user_id
+left join answer a on u.id = a.user_id
+left join comment c on u.id = c.user_id
+where u.id= %s
+group by  u.id
+        """
+    cursor.execute(query,(userid))
+    return cursor.fetchall()

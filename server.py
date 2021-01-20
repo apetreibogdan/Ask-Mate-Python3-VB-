@@ -12,7 +12,6 @@ def list_first_5_questions():
 @app.route("/")
 def index():
     if session.get('username') :
-        variabila1 = session['username']
         return list_first_5_questions()
     else:
         return redirect('/login')
@@ -31,6 +30,8 @@ def login():
             hash_pass = data_manager.user_password(user)
             if utility.verify_password(password,hash_pass[0]['password']):
                 session['username']= user
+                userid = data_manager.select_userid(session['username'])
+                session['user_id']= userid[0]['id']
                 return list_first_5_questions()
 
             else:
@@ -103,8 +104,7 @@ def add_question():
         else:
             partial_question_story.update({'image': ''})
         question_story = utility.question_story_constructor(partial_question_story)
-        userid = data_manager.select_userid(session['username'])
-        data_manager.write_question_story(question_story,userid[0]['id'])
+        data_manager.write_question_story(question_story,session['user_id'])
         question_id = data_manager.get_bigest_id('question')
         return redirect(url_for('list_question', question_id=question_id['max']))
 
@@ -291,9 +291,12 @@ def register_user():
 def list_all_users():
     users_stories = data_manager.get_all_users_stories()
     return render_template("users.html", users_stories=users_stories)
-@app.route('/user')
-def profile():
-    return render_template('user.html')
+
+@app.route('/user/<string:user_id>')
+def profile(user_id):
+    profile_data = data_manager.list_user_profile(user_id)
+    print(profile_data)
+    return render_template('user.html',profile_data = profile_data)
 
 if __name__ == "__main__":
     app.run(

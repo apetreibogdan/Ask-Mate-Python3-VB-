@@ -2,13 +2,13 @@
 
 {% block content%}
 
-<h3>user id : </h3>
-<h3>User name : </h3>
-<h3>Registration date : </h3>
-<h3>Count of asked questions : </h3>
-<h3>Count of answers: </h3>
-<h3>Count of comments : </h3>
-<h3>Reputation : </h3>
+<h3>user id : {{ profile_data[0]['id'] }} </h3>
+<h3>User name : {{ profile_data[0]['username'] }}</h3>
+<h3>Registration date : {{ profile_data[0]['registration_date'] }} </h3>
+<h3>Count of asked questions : {{ profile_data[0]['count_questions'] }} </h3>
+<h3>Count of answers: {{ profile_data[0]['count_answers'] }}</h3>
+<h3>Count of comments :{{ profile_data[0]['count_comments'] }} </h3>
+<h3>Reputation : {{ profile_data[0]['reputation'] }} </h3>
 
 
 
