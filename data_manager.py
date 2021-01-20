@@ -1,5 +1,6 @@
 from psycopg2.extras import RealDictCursor
 import database_common, utility
+from flask import session
 import datetime
 
 
@@ -133,12 +134,14 @@ def write_answer_story(cursor: RealDictCursor, answer_story) -> list:
                                     vote_number,
                                     question_id,
                                     message,
-                                    image )
+                                    image,
+                                    user_id)
                 VALUES ('{answer_story['submission_time']}',
                         '{answer_story['vote_number']}',
                         '{answer_story['question_id']}',
                         '{answer_story['message']}',
-                        '{answer_story['image']}')
+                        '{answer_story['image']}',
+                        '{session['user_id']}')
                 """
     cursor.execute(query)
 
@@ -294,13 +297,15 @@ def write_question_comment(cursor: RealDictCursor, question_comment_story):
                 INSERT INTO comment (question_id,
                                     submission_time,
                                     message,
-                                    edited_count )
-                VALUES ( %s, %s, %s, %s)
+                                    edited_count,
+                                    user_id)
+                VALUES ( %s, %s, %s, %s, %s)
                 """
     cursor.execute(query, (question_comment_story['question_id'],
                            question_comment_story['submission_time'],
                            question_comment_story['message'],
-                           question_comment_story['edited_count'])
+                           question_comment_story['edited_count'],
+                           session['user_id'])
                    )
 
 
@@ -332,13 +337,15 @@ def write_answer_comment(cursor: RealDictCursor, answer_comment_story):
                 INSERT INTO comment (answer_id,
                                     submission_time,
                                     message,
-                                    edited_count )
-                VALUES ( %s, %s, %s, %s)
+                                    edited_count,
+                                    user_id)
+                VALUES ( %s, %s, %s, %s, %s)
                 """
     cursor.execute(query, (answer_comment_story['answer_id'],
                            answer_comment_story['submission_time'],
                            answer_comment_story['message'],
-                           answer_comment_story['edited_count']))
+                           answer_comment_story['edited_count'],
+                           session['user_id']))
 
 
 @database_common.connection_handler
@@ -436,8 +443,12 @@ def write_user_story(cursor: RealDictCursor, user_story) -> list:
 @database_common.connection_handler
 def get_all_users_stories(cursor: RealDictCursor ) -> list:
     query = """
-        SELECT *
-        FROM users
+       select  u.id, u.username, u.registration_date, u.reputation, count (distinct q.id) as count_questions, count (distinct a.id) as count_answers, count (distinct c.id) as count_comments
+from users u
+left join question q on u.id = q.user_id
+left join answer a on u.id = a.user_id
+left join comment c on u.id = c.user_id
+group by  u.id 
         """
     cursor.execute(query)
     return cursor.fetchall()
