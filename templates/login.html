@@ -6,14 +6,29 @@
 {% if error != None %}
 {{ error }}
 {% endif %}
+    <div style="margin: 0 auto;width: 500px ; height:400px ;
+    border-radius: 15px;background-color: bisque; padding:20px; text-align:center; margin-top: 50px">
+    <h3>Login</h3>
+
 <form method="post">
-    <label for="user">User</label>
-    <input type="text" name="user" id="user">
-    <label for="password">password</label>
-    <input type="password" name="password" id="password">
+    <table>
+    <tr>
+        <td><label for="user">User</label> </td>
+     <td><input type="text" name="user" id="user"></td>
+
+    </tr>
+    <tr>
+        <td><label for="password">Password</label></td>
+        <td> <input type="password" name="password" id="password"></td>
+</tr>
+        </table>
     <button type="submit">Sign in</button>
-
 </form>
+        <br><br>
 
+        <form action="{{ url_for("register_user") }}">
+    <button type="submit">Register</button>
+       </form>
+</div>
 
 {% endblock %}

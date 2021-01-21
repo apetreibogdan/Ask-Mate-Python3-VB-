@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block content%}
-
-<h3>user id : {{ profile_data[0]['id'] }} </h3>
-<h3>User name : {{ profile_data[0]['username'] }}</h3>
-<h3>Registration date : {{ profile_data[0]['registration_date'] }} </h3>
-<h3>Count of asked questions : {{ profile_data[0]['count_questions'] }} </h3>
-<h3>Count of answers: {{ profile_data[0]['count_answers'] }}</h3>
-<h3>Count of comments :{{ profile_data[0]['count_comments'] }} </h3>
-<h3>Reputation : {{ profile_data[0]['reputation']}} </h3>
-    <table>
+<table>
+<tr><td>User id :</td><td> {{ profile_data[0]['id'] }}</td> </tr>
+<tr><td>User name :</td><td> {{ profile_data[0]['username'] }}</td></tr>
+<tr><td>Registration date :</td><td> {{ profile_data[0]['registration_date'] }}</td> </tr>
+<tr><td>Count of asked questions :</td><td> {{ profile_data[0]['count_questions'] }} </td></tr>
+<tr><td>Count of answers:</td> <td>{{ profile_data[0]['count_answers'] }}</td></tr>
+<tr><td>Count of comments :</td><td>{{ profile_data[0]['count_comments'] }}</td> </tr>
+<tr><td>Reputation : </td><td>{{ profile_data[0]['reputation']}}</td> </tr>
+</table>
+    <table id="user_info">
     <thead>
-    <tr>
-        <th>Questions</th>
+        <tr> <th>Questions</th>
+     <th>Answers</th>
+     <th>Comments</th>
     </tr>
-    </thead>
+        </thead>
+
+    <tr>
+    <td style="width: 30% "; >
+    <table class ="list_user">
+
     <tbody>
     {% if profile_data[0]['user_questions'] %}
     {% for items in profile_data[0]['user_questions'].split('--') %}
@@ -26,13 +33,11 @@
     </tr>
     </tbody>
     </table>
- <br><br>
-        <table>
-    <thead>
-    <tr>
-        <th>Answers</th>
-    </tr>
-    </thead>
+
+    </td>
+     <td style="width: 30% " >
+        <table class ="list_user">
+
     <tbody>
     {% if profile_data[0]['user_answers'] %}
     {% for items in profile_data[0]['user_answers'].split('--') %}
@@ -45,13 +50,10 @@
     </tbody>
     </table>
 
-     <br><br>
-        <table>
-    <thead>
-    <tr>
-        <th>Comments</th>
-    </tr>
-    </thead>
+     </td>
+     <td style="width: 30% "; >
+        <table class ="list_user">
+
     <tbody>
     {% if profile_data[0]['user_comments'] %}
     {% for items in profile_data[0]['user_comments'].split('--') %}
@@ -65,5 +67,7 @@
     </tr>
     </tbody>
     </table>
-
+     </td>
+    </tr>
+    </table>
 {% endblock %}

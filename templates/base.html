@@ -14,11 +14,12 @@
 
 
 <div class="topnav">
-  <a class="active" href="/search">The Pie Society</a>
+  <a class="active">The Pie Society</a>
   <a href="/add-question">Add a question</a>
   <a href="{{ url_for('list_all_questions') }}"> List all questions</a>
     <a href="{{ url_for('register_user') }}"> Sign Up</a>
   <a href="{{ url_for('list_all_users') }}">List all users</a>
+
   <div class="search-container">
     <form action="/search">
       <input class="search" type="search" id="site-search" name="q"
@@ -26,6 +27,17 @@
         <button>Search</button>
     </form>
   </div>
+        <div style="float:right; margin-right: 20px">
+        {% if session['username'] %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </div>
+<div>
+<a href="{{url_for("profile",user_id = session['user_id'])}}">Profile</a>
+
+</div>
 </div>
 
 
