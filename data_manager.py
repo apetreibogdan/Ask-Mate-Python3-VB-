@@ -467,10 +467,10 @@ from users u
 left join question q on u.id = q.user_id
 left join answer a on u.id = a.user_id
 left join comment c on u.id = c.user_id
-where u.id= %s
+where u.id= '%s'
 group by  u.id
         """
-    cursor.execute(query,(userid))
+    cursor.execute(query%(userid))
     return cursor.fetchall()
 
 
