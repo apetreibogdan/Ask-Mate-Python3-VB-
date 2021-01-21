@@ -467,3 +467,24 @@ group by  u.id
         """
     cursor.execute(query,(userid))
     return cursor.fetchall()
+
+
+
+
+@database_common.connection_handler
+def mark_answer_as_accepted(cursor: RealDictCursor, answer_id) -> list:
+    query = f"""
+            UPDATE answer
+            SET accepted = 10
+            WHERE id = {answer_id}
+            """
+    cursor.execute(query)
+
+@database_common.connection_handler
+def unmark_accepted_answer(cursor: RealDictCursor, answer_id) -> list:
+    query = f"""
+            UPDATE answer
+            SET accepted = 5
+            WHERE id = {answer_id}
+            """
+    cursor.execute(query)

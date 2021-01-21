@@ -79,7 +79,6 @@ def list_search_result():
 def list_question(question_id):
     if request.method == "GET":
         question_story = data_manager.get_questions_story(question_id)
-        print(question_story)
         answer_story = data_manager.get_answer_story(question_id)
         question_comment_stories = data_manager.get_question_comments_stories(question_id)
         all_answers_comments_stories = data_manager.get_all_comment_stories()
@@ -295,8 +294,22 @@ def list_all_users():
 @app.route('/user/<string:user_id>')
 def profile(user_id):
     profile_data = data_manager.list_user_profile(user_id)
-    print(profile_data)
     return render_template('user.html',profile_data = profile_data)
+
+
+@app.route('/mark-accepted/<answer_id>/<question_id>')
+def route_mark_accepted(answer_id, question_id):
+    data_manager.mark_answer_as_accepted(answer_id)
+    return redirect(url_for('list_question', question_id=question_id))
+
+
+@app.route('/unmark/<answer_id>/<question_id>')
+def route_unmark_answer(answer_id, question_id):
+    data_manager.unmark_accepted_answer(answer_id)
+    return redirect(url_for('list_question', question_id=question_id))
+
+
+
 
 if __name__ == "__main__":
     app.run(
