@@ -50,14 +50,14 @@
         {% for answer in answer_story %}
             {% if session['user_id']  == answer['user_id'] %}
                 {{ answer['accepted'] }}
-                {% if answer['accepted'] != 5 %}
+                {% if answer['accepted'] == 5 %}
                             <i class="fas fa-check-square"></i><br>
                                 <button>
-                                <a href="/mark-accepted/{{answer['id']}}/{{  answer['question_id'] }}">Unmark</a>
+                                <a href="/mark-accepted/{{answer['id']}}/{{  answer['question_id'] }}">Mark as accepted</a>
                                 </button>
                 {% else %}
                             <button>
-                               <a href="/unmark/{{answer['id']}}/{{  answer['question_id'] }}">Mark as accepted</a>
+                               <a href="/unmark/{{answer['id']}}/{{  answer['question_id'] }}">Unmark</a>
                             </button>
                 {% endif %}
             {% endif %}
