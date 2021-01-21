@@ -235,3 +235,9 @@ blockquote {
 .buttons1 {
     display: inline-block;
 }
+/*----------------*/
+
+.list_image{
+alignment: right;
+    margin: 5px ;
+}

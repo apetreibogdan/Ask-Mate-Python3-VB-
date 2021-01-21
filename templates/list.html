@@ -6,41 +6,45 @@
 
 
 
-
-    <div class="content">
-        <h1>List questions</h1>
-        <div class="sort_form">
-            <form  action="{{ url_for('list_all_questions') }}" >
-                <label for="Sort_by">Sort by:</label>
-                <select name="order_by" >
-                    <option value="title">Question</option>
-                    <option value="submission_time">Submision time</option>
-                    <option value="message">Message</option>
-                    <option value="view_number">Views</option>
-                    <option value="vote_number">Vote</option>
-                </select>
-                <select name="order_direction">
-                    <option value="DESC">Descendent</option>
-                    <option value="ASC">Ascendent</option>
-                </select>
-                <input type="submit" value="Sort">
-            </form>
-        </div>
-        {% for question_story in all_questions_stories %}
-            <hr/>
-            <h1><a href="{{ url_for('list_question', question_id=question_story.id) }}">{{question_story.title|safe}}</a><br></h1>
-            <h2  style="margin-left:5em"> - {{ question_story.message|safe}}</h2>
-
-            <img src="/static/image/question/{{question_story.image}}" width="200">
-            <div class="time_vote_view">
-{#                views: {{ question_story.view_number}}#}
-                votes: {{ question_story.vote_number}}
-                Submision time:{{ question_story.submission_time}}
-            </div>
-            <hr/>
-        {% endfor %}
+<br><br>
+    <div class="sort_form">
+        <form  action="{{ url_for('list_all_questions') }}" >
+            <label for="Sort_by">Sort by:</label>
+            <select name="order_by" >
+                <option value="title">Question</option>
+                <option value="submission_time">Submision time</option>
+                <option value="message">Message</option>
+                <option value="view_number">Views</option>
+                <option value="vote_number">Vote</option>
+            </select>
+            <select name="order_direction">
+                <option value="DESC">Descendent</option>
+                <option value="ASC">Ascendent</option>
+            </select>
+            <input type="submit" value="Sort">
+        </form>
     </div>
 
 
+    <table>
+        <tr>
+            <th>Question</th>
+            <td>Message</td>
+            <th>Views</th>
+            <th>Votes</th>
+            <th>Submission time </th>
+            <th>Image</th>
+        </tr>
+        {% for question_story in all_questions_stories %}
+        <tr>
+            <td><a href="{{ url_for('list_question', question_id=question_story.id) }}">{{question_story.title|safe}}</a> </td>
+            <td> {{ question_story.message|safe}} </td>
+            <td> views: {{ question_story.view_number}} </td>
+            <td> votes: {{ question_story.vote_number}} </td>
+            <td> {{ question_story.submission_time}} </td>
+            <td> <img class="list_image" src="/static/image/question/{{question_story.image}}" height="100" alt="Tematic image"> </td>
+        </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}

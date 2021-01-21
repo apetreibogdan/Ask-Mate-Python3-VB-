@@ -52,64 +52,73 @@ def logout():
 
 @app.route("/list")
 def list_all_questions():
-    if not request.args.get('order_by') and request.args.get('order_direction'):
-        all_questions_stories = data_manager.get_all_questions_stories()
-        return render_template("list.html", all_questions_stories=all_questions_stories)
+    if session.get('username'):
+        if not request.args.get('order_by') and request.args.get('order_direction'):
+            all_questions_stories = data_manager.get_all_questions_stories()
+            return render_template("list.html", all_questions_stories=all_questions_stories)
+        else:
+            order_by = request.args.get('order_by')
+            order_direction = request.args.get('order_direction')
+            all_questions_stories = data_manager.get_all_questions_stories_sorted(order_by, order_direction)
+            return render_template("list.html", all_questions_stories=all_questions_stories)
     else:
-        order_by = request.args.get('order_by')
-        order_direction = request.args.get('order_direction')
-        all_questions_stories = data_manager.get_all_questions_stories_sorted(order_by, order_direction)
-        return render_template("list.html", all_questions_stories=all_questions_stories)
-
+        return redirect('/login')
 
 @app.route("/search")
 def list_search_result():
-    word = request.args.get('q')
-    all_questions_stories = data_manager.get_questions_story_by_search_word(word)
-    for question_story in all_questions_stories:
-        if word in question_story['title']:
-            question_story['title'] = question_story['title'].replace(word,'<span style="background-color: yellow;">'+word+'</span>')
-        if word in question_story['message']:
-            question_story['message'] = question_story['message'].replace(word,'<span style="background-color: yellow;">'+word+'</span>')
+    if session.get('username'):
+        word = request.args.get('q')
+        all_questions_stories = data_manager.get_questions_story_by_search_word(word)
+        for question_story in all_questions_stories:
+            if word in question_story['title']:
+                question_story['title'] = question_story['title'].replace(word,'<span style="background-color: yellow;">'+word+'</span>')
+            if word in question_story['message']:
+                question_story['message'] = question_story['message'].replace(word,'<span style="background-color: yellow;">'+word+'</span>')
 
-    return render_template("list.html", all_questions_stories=all_questions_stories, word=word)
-
+        return render_template("list.html", all_questions_stories=all_questions_stories, word=word)
+    else:
+        return redirect('/login')
 
 @app.route('/display-question/<question_id>', methods=['POST', 'GET'])
 def list_question(question_id):
-    if request.method == "GET":
-        question_story = data_manager.get_questions_story(question_id)
-        answer_story = data_manager.get_answer_story(question_id)
-        question_comment_stories = data_manager.get_question_comments_stories(question_id)
-        all_answers_comments_stories = data_manager.get_all_comment_stories()
-        all_tags_for_a_question = data_manager.get_all_tags_for_a_question(question_id)
-        return render_template('display-question.html',
-                               question_story=question_story,
-                               answer_story=answer_story,
-                               question_comment_stories=question_comment_stories,
-                               all_answers_comments_stories=all_answers_comments_stories,
-                               all_tags_for_a_question=all_tags_for_a_question)
+    if session.get('username'):
+        if request.method == "GET":
+            question_story = data_manager.get_questions_story(question_id)
+            answer_story = data_manager.get_answer_story(question_id)
+            question_comment_stories = data_manager.get_question_comments_stories(question_id)
+            all_answers_comments_stories = data_manager.get_all_comment_stories()
+            all_tags_for_a_question = data_manager.get_all_tags_for_a_question(question_id)
+            return render_template('display-question.html',
+                                   question_story=question_story,
+                                   answer_story=answer_story,
+                                   question_comment_stories=question_comment_stories,
+                                   all_answers_comments_stories=all_answers_comments_stories,
+                                   all_tags_for_a_question=all_tags_for_a_question)
+    else:
+        return redirect('/login')
 
 
 @app.route('/add-question', methods=['POST', 'GET'])
 def add_question():
-    if request.method == "POST":
-        partial_question_story = request.form.to_dict()
-        if request.files:
-            image = request.files["image"]
-            image.save(
-                os.path.join(utility.QUESTION_IMG_PATH, image.filename))
-            partial_question_story.update({'image': image.filename})
-        else:
-            partial_question_story.update({'image': ''})
-        question_story = utility.question_story_constructor(partial_question_story)
-        data_manager.write_question_story(question_story,session['user_id'])
-        question_id = data_manager.get_bigest_id('question')
-        return redirect(url_for('list_question', question_id=question_id['max']))
+    if session.get('username'):
+        if request.method == "POST":
+            partial_question_story = request.form.to_dict()
+            if request.files:
+                image = request.files["image"]
+                image.save(
+                    os.path.join(utility.QUESTION_IMG_PATH, image.filename))
+                partial_question_story.update({'image': image.filename})
+            else:
+                partial_question_story.update({'image': ''})
+            question_story = utility.question_story_constructor(partial_question_story)
+            data_manager.write_question_story(question_story,session['user_id'])
+            question_id = data_manager.get_bigest_id('question')
+            return redirect(url_for('list_question', question_id=question_id['max']))
 
-    if request.method == "GET":
-        return render_template('add-question.html')
-
+        if request.method == "GET":
+            return render_template('add-question.html')
+    else:
+        return redirect('/login')
 
 @app.route('/display-question/<question_id>/add-answer', methods=['POST', 'GET'])
 def add_answer(question_id):
@@ -284,18 +293,22 @@ def register_user():
         data_manager.write_user_story(user_story)
         return redirect('/')
 
-
-
 @app.route('/users')
 def list_all_users():
-    users_stories = data_manager.get_all_users_stories()
-    return render_template("users.html", users_stories=users_stories)
+    if session.get('username'):
+        users_stories = data_manager.get_all_users_stories()
+        return render_template("users.html", users_stories=users_stories)
+    else:
+        return redirect('/login')
 
 @app.route('/user/<string:user_id>')
 def profile(user_id):
-    data_manager.set_reputation_user(session["user_id"])
-    profile_data = data_manager.list_user_profile(user_id)
-    return render_template('user.html',profile_data = profile_data)
+    if session.get('username'):
+        data_manager.set_reputation_user(session["user_id"])
+        profile_data = data_manager.list_user_profile(user_id)
+        return render_template('user.html',profile_data = profile_data)
+    else:
+        return redirect('/login')
 
 
 @app.route('/link_q/<string:question>')
