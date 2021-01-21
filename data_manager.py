@@ -474,6 +474,7 @@ group by  u.id
     return cursor.fetchall()
 
 
+
 @database_common.connection_handler
 def redirect_question(cursor: RealDictCursor, question) -> list:
     query = """
@@ -508,6 +509,26 @@ def set_reputation_user(cursor: RealDictCursor,id) -> list:
 update users u
 set reputation = ((select sum(vote_number) from question q where q.user_id = u.id)+
                  (select sum(vote_number) from answer a where a.user_id = u.id)+
-                  (select sum(acceptance)from answer a where a.user_id = u.id))
+                  (select sum(accepted)from answer a where a.user_id = u.id))
 where  u.id = '%s'"""
     cursor.execute(query%(id))
+
+
+
+@database_common.connection_handler
+def mark_answer_as_accepted(cursor: RealDictCursor, answer_id) -> list:
+    query = f"""
+            UPDATE answer
+            SET accepted = 10
+            WHERE id = {answer_id}
+            """
+    cursor.execute(query)
+
+@database_common.connection_handler
+def unmark_accepted_answer(cursor: RealDictCursor, answer_id) -> list:
+    query = f"""
+            UPDATE answer
+            SET accepted = 5
+            WHERE id = {answer_id}
+            """
+    cursor.execute(query)
