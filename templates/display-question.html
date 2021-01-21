@@ -49,7 +49,6 @@
 
         {% for answer in answer_story %}
             {% if session['user_id']  == answer['user_id'] %}
-                {{ answer['accepted'] }}
                 {% if answer['accepted'] == 5 %}
                             <i class="fas fa-check-square"></i><br>
                                 <button>

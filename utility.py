@@ -3,8 +3,8 @@ import datetime
 import os
 import bcrypt
 
-QUESTION_IMG_PATH = "/home/victor/PycharmProjects/ask-mate-3-python-Kinkey232/static/image/question"
-ANSWER_IMG_PATH = "/home/victor/PycharmProjects/ask-mate-3-python-Kinkey232/static/image/answer"
+QUESTION_IMG_PATH = "/home/bobo/PycharmProjects/ask-mate-3-python-Kinkey232/static/image/question"
+ANSWER_IMG_PATH = "/home/bobo/PycharmProjects/ask-mate-3-python-Kinkey232/static/image/answer"
 
 
 def question_story_constructor(partial_question_story):
