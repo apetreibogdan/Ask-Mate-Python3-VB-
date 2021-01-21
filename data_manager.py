@@ -457,7 +457,12 @@ group by  u.id
 @database_common.connection_handler
 def list_user_profile(cursor: RealDictCursor ,userid) -> list:
     query = """
-        select  u.id, u.username, u.registration_date, u.reputation, count (distinct q.id) as count_questions, count (distinct a.id) as count_answers, count (distinct c.id) as count_comments
+select  u.id, u.username, u.registration_date, u.reputation, count (distinct q.id) as count_questions, count (distinct a.id) as count_answers,
+       count (distinct c.id) as count_comments,
+       string_agg (distinct  a.message::character varying,'--' order by a.message::character varying desc) as "user_answers",
+       string_agg (distinct  q.message::character varying,'--' order by q.message::character varying desc) as "user_questions",
+       string_agg (distinct  c.message::character varying,'--' order by c.message::character varying desc) as "user_comments"
+
 from users u
 left join question q on u.id = q.user_id
 left join answer a on u.id = a.user_id
@@ -467,3 +472,42 @@ group by  u.id
         """
     cursor.execute(query,(userid))
     return cursor.fetchall()
+
+
+@database_common.connection_handler
+def redirect_question(cursor: RealDictCursor, question) -> list:
+    query = """
+        SELECT id
+        FROM question
+        WHERE message  like '%s'"""
+    cursor.execute(query%(question))
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def redirect_answer(cursor: RealDictCursor, answer) -> list:
+    query = """
+        SELECT question_id
+        FROM answer
+        WHERE message  like '%s'"""
+    cursor.execute(query%(answer))
+    return cursor.fetchall()
+
+@database_common.connection_handler
+def redirect_comment(cursor: RealDictCursor, comment) -> list:
+    query = """
+        SELECT question_id
+        FROM comment
+        WHERE message  like '%s'"""
+    cursor.execute(query%(comment))
+    return cursor.fetchall()
+
+
+@database_common.connection_handler
+def set_reputation_user(cursor: RealDictCursor,id) -> list:
+    query = """
+update users u
+set reputation = ((select sum(vote_number) from question q where q.user_id = u.id)+
+                 (select sum(vote_number) from answer a where a.user_id = u.id)+
+                  (select sum(acceptance)from answer a where a.user_id = u.id))
+where  u.id = '%s'"""
+    cursor.execute(query%(id))

@@ -8,8 +8,62 @@
 <h3>Count of asked questions : {{ profile_data[0]['count_questions'] }} </h3>
 <h3>Count of answers: {{ profile_data[0]['count_answers'] }}</h3>
 <h3>Count of comments :{{ profile_data[0]['count_comments'] }} </h3>
-<h3>Reputation : {{ profile_data[0]['reputation'] }} </h3>
+<h3>Reputation : {{ profile_data[0]['reputation']}} </h3>
+    <table>
+    <thead>
+    <tr>
+        <th>Questions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if profile_data[0]['user_questions'] %}
+    {% for items in profile_data[0]['user_questions'].split('--') %}
+    <tr>
+        <td><a href="{{ url_for('user_question_link', question = items) }}">{{ items }}</a><br></td>
+
+    {% endfor %}
+    {% endif %}
+    </tr>
+    </tbody>
+    </table>
+ <br><br>
+        <table>
+    <thead>
+    <tr>
+        <th>Answers</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if profile_data[0]['user_answers'] %}
+    {% for items in profile_data[0]['user_answers'].split('--') %}
+    <tr>
+    <td><a href="{{ url_for('user_answer_link', answer = items) }}">{{ items }}</a><br></td>
+
+    {% endfor %}
+    {% endif %}
+    </tr>
+    </tbody>
+    </table>
+
+     <br><br>
+        <table>
+    <thead>
+    <tr>
+        <th>Comments</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if profile_data[0]['user_comments'] %}
+    {% for items in profile_data[0]['user_comments'].split('--') %}
+    <tr>
+
+    <td><a href="{{ url_for('user_comment_link', comment = items) }}">{{ items }}</a><br></td>
+        {% endfor %}
+        {% endif %}
 
 
+    </tr>
+    </tbody>
+    </table>
 
 {% endblock %}

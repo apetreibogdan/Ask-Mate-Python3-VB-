@@ -294,9 +294,25 @@ def list_all_users():
 
 @app.route('/user/<string:user_id>')
 def profile(user_id):
+    data_manager.set_reputation_user(session["user_id"])
     profile_data = data_manager.list_user_profile(user_id)
-    print(profile_data)
     return render_template('user.html',profile_data = profile_data)
+
+@app.route('/link_q/<string:question>')
+def user_question_link(question):
+    id =data_manager.redirect_question(question)
+    return list_question(str(id[0]["id"]))
+
+@app.route('/link_a/<string:answer>')
+def user_answer_link(answer):
+    id =data_manager.redirect_answer(answer)
+    return list_question(str(id[0]["question_id"]))
+
+@app.route('/link_c/<string:comment>')
+def user_comment_link(comment):
+    id =data_manager.redirect_comment(comment)
+    return list_question(str(id[0]["question_id"]))
+
 
 if __name__ == "__main__":
     app.run(
