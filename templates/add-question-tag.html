@@ -5,15 +5,16 @@
 
 {% block content %}
 
-
-    <div class="form">
-        <form action="{{ url_for('add_question_tag', question_id=question_id)}}" method="POST" class="tagform">
+<br><br>
+ <<div style="margin: 0 auto;width: 400px ; height:100px ;
+    border-radius: 15px;background-color: bisque; padding:20px; text-align:center; margin-top: 50px">
+    <form action="{{ url_for('add_question_tag', question_id=question_id)}}" method="POST" class="tagform">
             <fieldset>
-                <span><input type="checkbox" name="tag" value="css"> <span>CSS</span> </span>
+{#                <span><input type="checkbox" name="tag" value="css"> <span>CSS</span> </span>#}
                 <span><input type="checkbox" name="tag" value="sql"> <span>SQL</span></span>
-                <span><input type="checkbox" name="tag" value="php"> <span>PHP</span></span>
+{#                <span><input type="checkbox" name="tag" value="php"> <span>PHP</span></span>#}
                 <span><input type="checkbox" name="tag" value="java"> <span>Java</span></span>
-                <span><input type="checkbox" name="tag" value="javascript"> <span>Javascript</span></span>
+{#                <span><input type="checkbox" name="tag" value="javascript"> <span>Javascript</span></span>#}
                 <span><input type="checkbox" name="tag" value="python"> <span>Python</span></span>
             </fieldset>
                 <br>

@@ -30,7 +30,7 @@
         <tr>
             <th>Question</th>
             <td>Message</td>
-            <th>Views</th>
+{#            <th>Views</th>#}
             <th>Votes</th>
             <th>Submission time </th>
             <th>Image</th>
@@ -39,7 +39,7 @@
         <tr>
             <td><a href="{{ url_for('list_question', question_id=question_story.id) }}">{{question_story.title|safe}}</a> </td>
             <td> {{ question_story.message|safe}} </td>
-            <td> views: {{ question_story.view_number}} </td>
+{#            <td> views: {{ question_story.view_number}} </td>#}
             <td> votes: {{ question_story.vote_number}} </td>
             <td> {{ question_story.submission_time}} </td>
             <td> <img class="list_image" src="/static/image/question/{{question_story.image}}" height="100" alt="Tematic image"> </td>

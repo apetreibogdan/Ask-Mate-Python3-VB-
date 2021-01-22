@@ -303,6 +303,7 @@ def list_all_users():
 
 @app.route('/user/<string:user_id>')
 def profile(user_id):
+    print (session.get('username'))
     if session.get('username'):
         data_manager.set_reputation_user(session["user_id"])
         profile_data = data_manager.list_user_profile(user_id)
@@ -337,7 +338,6 @@ def route_mark_accepted(answer_id, question_id):
 def route_unmark_answer(answer_id, question_id):
     data_manager.unmark_accepted_answer(answer_id)
     return redirect(url_for('list_question', question_id=question_id))
-
 
 
 
