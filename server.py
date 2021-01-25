@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask,redirect,render_template,request,url_for,session,Response,make_response
 import data_manager, utility
 import os
