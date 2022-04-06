@@ -70,13 +70,13 @@ systems have similar steps but please check the details on the web first. Also P
 
         
 5. Install and activate the virtual environment in the git project folder (not 
-where you ran git clone)
+where you run git clone)
 
         pip3 install virtualenv
         virtualenv venv
         source venv/bin/activate
         
-6. Create  a .env file in the root of the folder 
+6. Create  an  .env file in the root of the folder 
 
          export PSQL_USER_NAME= <add your postgress user name>
          export PSQL_PASSWORD= <add your postgress password>
