@@ -2,6 +2,8 @@
 Web and SQL with Python / 1st and 2nd TW week / Ask Mate project
 
 
+
+
 ## Description
 Small web project with a question and answer format. It is essentially an
  extremely simple Stack Overflow clone.  
@@ -14,6 +16,22 @@ number of views, number of votes, question alphabetically and details alphabetic
 - upvote or downvote questions and answers
 - add/edit comments to questions and answers  
 Note: Not all features are available at this time.
+
+# Login
+![Login](https://user-images.githubusercontent.com/70704260/161933787-65835ead-5166-481c-85a0-4878dc5be260.png)
+
+
+# List all questions
+![List all questions](https://user-images.githubusercontent.com/70704260/161929990-9f640b7c-52ac-4802-bec5-09af5a75f3c9.png)
+
+# Search
+![UnSeartch](https://user-images.githubusercontent.com/70704260/161933125-e973e7c8-8a64-4dcd-a618-02b7c04d2808.png)
+
+# Display Answers and Comments
+![Display answers and comments ](https://user-images.githubusercontent.com/70704260/161934685-fa061603-8453-420d-9ee7-0a707d2a365f.png)
+
+
+
 ## Installation
 This installation guide is made for the Ubuntu operating system. Other operating 
 systems have similar steps but please check the details on the web first. Also Python
