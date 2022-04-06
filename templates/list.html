@@ -37,7 +37,7 @@
             <h1><a href="{{ url_for('list_question', question_id=question_story.id) }}">{{question_story.title|safe}}</a><br></h1>
             <h2  style="margin-left:5em"> - {{ question_story.message|safe}}</h2>
 
-            <img src="/static/image/question/{{question_story.image}}" width="200">
+            <img src="{{question_story.image}}" width="200">
             <div class="time_vote_view">
 {#                views: {{ question_story.view_number}}#}
                 votes: {{ question_story.vote_number}}
