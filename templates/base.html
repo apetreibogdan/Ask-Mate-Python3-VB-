@@ -14,24 +14,17 @@
 
 
 <div class="topnav">
-<<<<<<< HEAD
 
 
-  <a class="active">The Pie Society</a>
+  <a class="active">Q&A</a>
   <a href="{{ url_for('list_all_questions') }}"> List all questions</a>
 
     {% if session['username'] %}
         <a href="/add-question">Add a question</a>
-        <a href="{{ url_for('list_all_users') }}">List all users</a>
+        
     {% endif %}
 
 
-=======
-  <a class="active" href="/search">Q&A</a>
-  <a href="/add-question">Add a question</a>
-  <a href="{{ url_for('list_all_questions') }}"> List all questions</a>
-    <a href="{{ url_for('register_user') }}"> Sign Up</a>
->>>>>>> bobo
   <div class="search-container">
     <form action="/search">
       <input class="search" type="search" id="site-search" name="q"
@@ -47,11 +40,7 @@
             <a href="{{ url_for('register_user') }}"> Sign Up</a>
         {% endif %}
     </div>
-    <div>
-        {% if session['username'] %}
-            <a href="{{url_for("profile",user_id = session['user_id'])}}">Profile</a>
-        {% endif %}
-    </div>
+    
 </div>
 
 
