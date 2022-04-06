@@ -63,10 +63,14 @@ systems have similar steps but please check the details on the web first. Also P
     create a new database
     
         CREATE DATABASE askmate3; 
+        
+    conect to database
+    
+        \c askmate3
 
     run sample askmatepart2-sample-data.sql
 
-        \i sample_data/askmatepart2-sample-data.sql
+        \i <relative path to askmatepart2-sample-data.sql>
 
         
 5. Install and activate the virtual environment in the git project folder (not 
@@ -75,6 +79,10 @@ where you run git clone)
         pip3 install virtualenv
         virtualenv venv
         source venv/bin/activate
+        
+6. Install all dependencys from requirements.txt
+
+          pip3 install -r requirements.txt
         
 6. Create  an  .env file in the root of the folder 
 
